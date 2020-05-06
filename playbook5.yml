@@ -1,0 +1,12 @@
+---
+- name: this is testing for purpose
+  hosts: all
+  tasks: 
+   - name: creating multiple users uaing first method
+     user:
+      name: "{{ item.a }}"
+      password: "{{ item.b }}"
+      home: "{{ item.c }}"
+     with_items:
+      - {a: sai,b: test@1,c: /home/sai}
+      - {a: kumar,b: test@2,c: /home/kumar} 

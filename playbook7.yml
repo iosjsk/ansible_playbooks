@@ -1,0 +1,19 @@
+---
+- name: this is for testing nested loops in ansible
+  hosts: all
+  vars:
+    user:
+     - tim
+     - nim
+    common_directories:
+     - .ssh
+     - loop
+  tasks:
+   - name: this is used for creating the users
+     file:
+      dest: "/home/{{ item.0 }}/{{ item.1 }}"
+      state: directory
+     with_nested:
+      - "{{ user }}"
+      - "{{ common_directories }}"
+

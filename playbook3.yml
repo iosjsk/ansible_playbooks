@@ -1,0 +1,10 @@
+---
+- name: this is for archiving the file 
+  hosts: 54.82.164.192
+  tasks:
+   - name: this is used for zipping the file 
+     archive:
+      path: /home/jenkins
+      dest: /home/jenkins.tar.gz 
+      format: gz
+...

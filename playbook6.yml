@@ -1,0 +1,25 @@
+---
+- name: this is creating the users in second method
+  hosts: all
+  vars:
+   users:
+      - wk
+      - kk
+   dir:
+      - d3
+      - d4
+  tasks:
+   - name: this is creating the users
+     user:
+      name: "{{ item }}"
+      password: test@1234
+      home: "/home/{{ item }}"
+     with_items:
+      - "{{ users }}"
+   - name: this is fro creating the directories int their respected home
+     file:
+      name: "/home/{{ item[0] }}/{{ item[1]}}"
+      state: directory
+     with_nested:
+      - "{{ users }}"
+      - "{{ dir }}"

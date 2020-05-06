@@ -1,0 +1,20 @@
+---
+- name: this is for testing the debug and capture th password for mysql
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: yes
+  tasks:
+   - name: this is for showing the password file
+     command: 
+      cmd: cat /home/.secretfile/mysqlpassword
+     register: passwd
+   - name: this for capturing the password in password file
+     debug:
+      msg: "this is {{ passwd.stdout_lines[2] }}"
+   - name: this is copying the lines in to another file
+     copy:
+      content: "{{ passwd.stdout_lines[2] }}"
+      dest: /var/www/html/index.html
+      
+  
