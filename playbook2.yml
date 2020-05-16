@@ -15,5 +15,15 @@
      copy:
       content: "{{ passwd.stdout_lines }}"
       dest: /var/www/html/index.html
+   - name: this is for changing the root password of mysql
+     shell: "mysql -e \"SET PASSWORD = 'Santhoshkumar@1';\" --connect-expired-password -uroot -p{{ item }}"
+     with_items:
+      - "{{ passwd.stdout_lines }}"
+     notify: restart mysqld
+  handlers:
+   - name: restart mysqld
+     service:
+      name: mysqld
+      state: restarted
       
   
