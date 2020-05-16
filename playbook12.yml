@@ -1,0 +1,7 @@
+---
+- name: this is forstarting the tomcat using ansible
+  hosts: all
+  tasks: 
+   - name: this is starting the tomcat 
+     command: nohup /usr/local/tomcat/bin/startup.sh
+

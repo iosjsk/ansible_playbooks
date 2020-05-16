@@ -6,15 +6,14 @@
   gather_facts: yes
   tasks:
    - name: this is for showing the password file
-     command: 
-      cmd: cat /home/.secretfile/mysqlpassword
+     shell:  awk  '/ A temporary password is generated for/{print $NF}' /var/log/mysqld.log
      register: passwd
    - name: this for capturing the password in password file
      debug:
-      msg: "this is {{ passwd.stdout_lines[2] }}"
+      msg: "this is {{ passwd.stdout_lines }}"
    - name: this is copying the lines in to another file
      copy:
-      content: "{{ passwd.stdout_lines[2] }}"
+      content: "{{ passwd.stdout_lines }}"
       dest: /var/www/html/index.html
       
   

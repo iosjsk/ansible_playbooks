@@ -1,0 +1,20 @@
+---
+- name: this is for login banner 
+  hosts: all
+  tasks: 
+   - name: this is used for creating the banner file
+     copy:
+      content: "Hi you have just logged in {{ansible_hostname}}\n"
+      dest: /etc/banner.txt
+   - name: this is used for replcaing the line
+     replace:
+      regexp: ^#Banner none
+      replace: Banner /etc/banner.txt
+      path: /etc/ssh/sshd_config
+     notify: restart sshd
+  handlers:
+   - name: restart sshd
+     service :
+      name: sshd
+      state: restarted
+     
