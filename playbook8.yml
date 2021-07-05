@@ -4,7 +4,7 @@
      - /home/vars1.yml
   hosts: all
   tasks:
-   - name: this is used for installing different pkgs
+   - name: this is used for installing different pkgs to install 
      yum:
       name: "{{ item }}"
       state: present
